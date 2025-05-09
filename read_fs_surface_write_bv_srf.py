@@ -8,7 +8,7 @@ import timeit
 
 # -----------------------------------------------------------------------------
 # Input: FreeSurfer surface file
-FILE = "/Users/administrator/Documents/akinetopsia/derivatives/freesurfer/sub-wlsubj140/surf/rh.inflated"
+FILE = "/Users/administrator/Documents/akinetopsia/derivatives/freesurfer/sub-wlsubj140/surf/lh.inflated"
 
 # Read vertices and faces from .surf file
 coords, faces = fs.read_geometry(FILE)
@@ -36,7 +36,7 @@ def compute_vertex_normals(verts, faces):
 # -----------------------------------------------------------------------------
 # Transform coordinates to BrainVoyager's RAS convention
 verts = np.stack((coords[:, 1], coords[:, 2], coords[:, 0]), axis=1)
-verts[:, 1] *= -1  # Flip Y
+verts[:, 1] *= -1  # Flip Y-axis
 
 # Compute normals
 norms = compute_vertex_normals(verts, faces)
@@ -62,16 +62,24 @@ for i in range(nr_verts):
     x = x * x[:, :, ::-1]
     edges = ord_edges[x].reshape((nr_neighbors, 2))
 
+    if len(edges) == 0:
+        nn.append([0])  # fallback if no neighbors found
+        continue
+
     idx_verts = [edges[0, 0], edges[0, 1]]
     edges_0 = edges[:, 0]
     edges_1 = edges[:, 1]
     n = 0
     while n < nr_neighbors - 2:
-        next_vert = edges_1[edges_0 == idx_verts[-1]][0]
+        matches = edges_1[edges_0 == idx_verts[-1]]
+        if matches.size == 0:
+            print(f"Warning: No further neighbor found for vertex {i} at step {n}")
+            break
+        next_vert = matches[0]
         idx_verts.append(next_vert)
         n += 1
 
-    idx_verts.insert(0, nr_neighbors)
+    idx_verts.insert(0, len(idx_verts))  # number of neighbors first
     nn.append(idx_verts)
 print("Done in", round(timeit.default_timer() - start_time, 2), "seconds.")
 
@@ -103,7 +111,7 @@ mesh_data = {
     "vertices": verts,
     "vertex normals": norms,
     "faces": faces,
-    "vertex colors": np.ones(nr_verts),
+    "vertex colors": np.ones((nr_verts, 4)),  # RGBA = 4 channels per vertex
     "vertex neighbors": nn
 }
 
@@ -113,4 +121,4 @@ outname = os.path.join(os.path.dirname(FILE), f"{basename}_bvbabel.srf")
 
 # Write SRF file
 bvbabel.srf.write_srf(outname, header, mesh_data)
-print(f"Finished writing: {outname}")
+print(f"✅ Finished writing: {outname}")

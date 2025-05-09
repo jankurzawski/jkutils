@@ -9,10 +9,10 @@ import pdb
 # surface map that has gray to white matter signal intensity ratios for each
 # vertex (ref: <https://surfer.nmr.mgh.harvard.edu/fswiki/pctsurfcon>)
 
-#FILE = "/Users/administrator/Documents/akinetopsia/derivatives/prfvista/sub-wlsubj140/ses-nyu3t01/rh.eccen.mgz"
-FILE = "/Users/administrator/Documents/akinetopsia/derivatives/GLMdenoise/sub-wlsubj140/ses-nyu3t01/rh.central_moving.mgz"
-#mask = "/Users/administrator/Documents/akinetopsia/derivatives/prfvista/sub-wlsubj140/ses-nyu3t01/rh.vexpl.mgz"
-mask = "/Users/administrator/Documents/akinetopsia/derivatives/GLMdenoise/sub-wlsubj140/ses-nyu3t01/rh.vexpl_glm.mgz"
+FILE = "/Users/administrator/Documents/akinetopsia/derivatives/prfvista/sub-wlsubj140/ses-nyu3t01/rh.y.mgz"
+#FILE = "/Users/administrator/Documents/akinetopsia/derivatives/GLMdenoise/sub-wlsubj140/ses-nyu3t01/rh.central_moving.mgz"
+mask = "/Users/administrator/Documents/akinetopsia/derivatives/prfvista/sub-wlsubj140/ses-nyu3t01/rh.vexpl.mgz"
+#mask = "/Users/administrator/Documents/akinetopsia/derivatives/GLMdenoise/sub-wlsubj140/ses-nyu3t01/rh.vexpl_glm.mgz"
 
 # -----------------------------------------------------------------------------
 # Read Freesurfer `*.w-g.pct.mgh` surface map
@@ -21,7 +21,7 @@ mask = nb.load(mask)
 mgh_data = np.squeeze(np.asarray(mgh.dataobj))
 mgh_data_mask = np.squeeze(np.asarray(mask.dataobj))
 
-mgh_data = mgh_data * (mgh_data_mask > 5)
+mgh_data = mgh_data * (mgh_data_mask > 0.05)
 nr_vertices = mgh_data.shape[0]
 
 # Generate dummy SMP file
