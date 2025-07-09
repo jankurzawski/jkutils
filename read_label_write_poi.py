@@ -4,9 +4,8 @@ import nibabel.freesurfer.io as fsio
 import bvbabel
 import pdb
 # === Config ===
-label_path = "/Users/administrator/Documents/akinetopsia/derivatives/freesurfer/sub-wlsubj140/label/bighypo_surf_rh_bin.label"
-# Automatically guess matching .srf from label
-srf_path = "/Users/administrator/Documents/akinetopsia/derivatives/freesurfer/sub-wlsubj140/surf/rh_white_bvbabel.srf"
+label_path = "file.label"
+srf_path = "rh_white_bvbabel.srf"
 poi_name = os.path.splitext(os.path.basename(label_path))[0]
 color_rgb = (255, 0, 0)
 

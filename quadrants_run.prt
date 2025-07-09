@@ -1,0 +1,39 @@
+
+FileVersion:        2
+
+ResolutionOfTime:   Volumes
+
+Experiment:         quadrants
+
+BackgroundColor:    0 0 0
+TextColor:          255 255 255
+TimeCourseColor:    255 255 255
+TimeCourseThick:    3
+ReferenceFuncColor: 0 0 80
+ReferenceFuncThick: 3
+
+NrOfConditions:     4
+
+low_right
+2
+   7   12
+  55   60
+Color: 195 195 195
+
+low_left
+2
+  19   24
+  67   72
+Color: 75 255 165
+
+up_left
+2
+  31   36
+  79   84
+Color: 40 150 255
+
+up_right
+2
+  43   48
+  91   96
+Color: 68 84 107

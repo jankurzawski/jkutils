@@ -7,7 +7,7 @@ import bvbabel
 
 # -----------------------------------------------------------------------------
 # Path to Freesurfer curvature file
-FILE = "/Users/administrator/Documents/akinetopsia/derivatives/freesurfer/sub-wlsubj140/surf/rh.curv"
+FILE = "rh.curv"
 
 # -----------------------------------------------------------------------------
 # Load curvature data (1D array, per-vertex)

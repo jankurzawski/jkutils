@@ -1,4 +1,4 @@
-"""Convert Freesurfer *.surf mesh to BrainVoyager SRF format (no GIFTI conversion needed)."""
+"""Convert Freesurfer *.surf mesh to BrainVoyager SRF format"""
 
 import os
 import numpy as np
@@ -8,7 +8,7 @@ import timeit
 
 # -----------------------------------------------------------------------------
 # Input: FreeSurfer surface file
-FILE = "/Users/administrator/Documents/akinetopsia/derivatives/freesurfer/sub-wlsubj140/surf/lh.inflated"
+FILE = "/Users/administrator/Documents/akinetopsia/derivatives/freesurfer/sub-wlsubj140/surf/lh.white"
 
 # Read vertices and faces from .surf file
 coords, faces = fs.read_geometry(FILE)
