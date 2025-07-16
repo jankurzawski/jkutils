@@ -8,7 +8,7 @@ import timeit
 
 # -----------------------------------------------------------------------------
 # Input: FreeSurfer surface file
-FILE = "/Users/administrator/Documents/akinetopsia/derivatives/freesurfer/sub-wlsubj140/surf/lh.white"
+FILE = "/Applications/freesurfer/7.4.1/subjects/fsaverage/surf/lh.white"
 
 # Read vertices and faces from .surf file
 coords, faces = fs.read_geometry(FILE)
